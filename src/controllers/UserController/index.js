@@ -1,4 +1,4 @@
-const passwordHelpers = require('../helpers')
+const bcrypt = require('../../helpers/bcryptjs')
 const userControllerHelpers = require('./helpers')
 
 const User = require('../../models/User')
@@ -17,7 +17,7 @@ module.exports = {
                 message: 'User already exists'                
             })
 
-            const encryptedPassword = await passwordHelpers.encryptPassword(password)            
+            const encryptedPassword = await bcrypt.encryptPassword(password)            
 
             const createdUser = await User.create({
                 email: email,
@@ -34,7 +34,7 @@ module.exports = {
 
     },
 
-    async getUsers(req, res) {
+    async getUsers(req, res) {        
 
         try {
 
@@ -55,6 +55,11 @@ module.exports = {
     async deleteUser(req, res) {
 
         const { user_id } = req.params
+        const { payload } = req.user
+
+        if (payload._id !== user_id) return res.status(400).json({
+            message: 'Operation not allowed'
+        })        
 
         try {
 

@@ -9,6 +9,16 @@ module.exports = {
 
         return encryptedPassword
 
-    }    
+    },
+    
+    async decryptPassword(passwords) {
+
+        const { requestPass, responsePass } = passwords
+
+        const isValid = await bcrypt.compare(requestPass, responsePass)
+
+        return isValid
+
+    }
 
 }
