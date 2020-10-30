@@ -36,9 +36,9 @@ module.exports = {
                 partyNumber: partyNumber
             },
             reportDescription: reportDescription,
-            reportLocation: {
+            location: {
                 type: 'Point',
-                coordinates: [latitude, longitude]
+                coordinates: [longitude, latitude]
             },
             reportAuthor: user_id,
             reportConfirmation: [user_id]

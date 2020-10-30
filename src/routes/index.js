@@ -3,6 +3,8 @@ const { Router } = require('express')
 const UserController = require('../controllers/UserController')
 const SessionController = require('../controllers/SessionController')
 const ReportController = require('../controllers/ReportController')
+const PublicReportController = require('../controllers/PublicReportController')
+const PublicReportsController = require('../controllers/PublicReportsController')
 
 const authenticate = require('../middlewares/auth')
 
@@ -21,5 +23,9 @@ routes.post('/sessions', SessionController.create)
 routes.post('/users/:user_id/reports', authenticate.verifyToken, ReportController.createReport)
 routes.get('/users/:user_id/reports', authenticate.verifyToken, ReportController.getReportsByAuthor)
 routes.delete('/users/:user_id/reports/:report_id', authenticate.verifyToken, ReportController.deleteReport)
+
+routes.get('/reports', PublicReportsController.getAllReports)
+
+routes.get('/reports/:report_id', PublicReportController.getReportById)
 
 module.exports = routes
