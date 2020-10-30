@@ -1,5 +1,7 @@
 const Report = require('../../models/Report')
 
+const { createUrlFromFileName } = require('../../helpers/getImageUrl')
+
 module.exports = {
 
     async getReportById(req, res) {
@@ -14,7 +16,9 @@ module.exports = {
                 message: 'Report not found'
             })
 
-            return res.status(200).json(report)
+            const imgUrl = createUrlFromFileName(report.reportThumbnail)
+            
+            return res.status(200).json({ report, imgUrl })
 
         } catch(err) {
 

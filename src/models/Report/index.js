@@ -30,6 +30,10 @@ const Schema = new mongoose.Schema({
         }
     },
     reportDescription: String,
+    reportThumbnail: {
+        type: String,
+        required: true     
+    },
     location: {
         type: PointSchema,
         index: '2dsphere'

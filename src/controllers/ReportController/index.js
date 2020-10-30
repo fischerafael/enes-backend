@@ -8,13 +8,14 @@ module.exports = {
 
         const bodyData = req.body
         const { user_id } = req.params
-        const { payload } = req.user
-
+        const { payload } = req.user  
+        const { filename } = req.file 
+        
         const { 
             candidateName,
             partyName,
             partyNumber,
-            reportDescription,
+            reportDescription,            
             latitude,
             longitude
         } = bodyData
@@ -36,6 +37,7 @@ module.exports = {
                 partyNumber: partyNumber
             },
             reportDescription: reportDescription,
+            reportThumbnail: filename,
             location: {
                 type: 'Point',
                 coordinates: [longitude, latitude]

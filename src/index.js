@@ -11,6 +11,7 @@ services.connectToDatabase(process.env.MONGO_URL)
 const app = express()
 
 app.use(express.json())
+app.use('/public', express.static('public'))
 app.use(routes)
 
 app.listen(PORT, console.log(`Server running on port ${PORT}`))

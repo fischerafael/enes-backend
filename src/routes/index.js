@@ -1,5 +1,7 @@
 const { Router } = require('express')
 
+const uploadFile = require('../helpers/multer')
+
 const UserController = require('../controllers/UserController')
 const SessionController = require('../controllers/SessionController')
 const ReportController = require('../controllers/ReportController')
@@ -20,7 +22,7 @@ routes.delete('/users/:user_id', authenticate.verifyToken, UserController.delete
 
 routes.post('/sessions', SessionController.create)
 
-routes.post('/users/:user_id/reports', authenticate.verifyToken, ReportController.createReport)
+routes.post('/users/:user_id/reports', authenticate.verifyToken, uploadFile.single('reportThumbnail'), ReportController.createReport)
 routes.get('/users/:user_id/reports', authenticate.verifyToken, ReportController.getReportsByAuthor)
 routes.delete('/users/:user_id/reports/:report_id', authenticate.verifyToken, ReportController.deleteReport)
 
