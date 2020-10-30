@@ -1,5 +1,6 @@
 const bcrypt = require('../../helpers/bcryptjs')
 const userControllerHelpers = require('./helpers')
+const { validateOnwership } = require('../helpers')
 
 const User = require('../../models/User')
 
@@ -57,9 +58,15 @@ module.exports = {
         const { user_id } = req.params
         const { payload } = req.user
 
-        if (payload._id !== user_id) return res.status(400).json({
+        const onwershipValidationDTO = {
+            reqBodyId: user_id, 
+            tokenId: payload._id
+        }
+
+        const isOwnershipValid = validateOnwership(onwershipValidationDTO)
+        if (isOwnershipValid === false) return res.status(400).json({
             message: 'Operation not allowed'
-        })        
+        })     
 
         try {
 
