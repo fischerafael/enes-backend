@@ -17,7 +17,8 @@ module.exports = {
             partyNumber,
             reportDescription,            
             latitude,
-            longitude
+            longitude,
+            reportURLLink,
         } = bodyData
 
         const onwershipValidationDTO = {
@@ -38,6 +39,7 @@ module.exports = {
             },
             reportDescription: reportDescription,
             reportThumbnail: filename,
+            reportURLLink: reportURLLink,
             location: {
                 type: 'Point',
                 coordinates: [longitude, latitude]

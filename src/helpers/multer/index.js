@@ -21,4 +21,10 @@ const config = {
 
 const upload = multer(config)
 
-module.exports = upload
+function uploadSingleImage(image_field_name) {
+
+    return upload.single(image_field_name)
+
+}
+
+module.exports = uploadSingleImage
