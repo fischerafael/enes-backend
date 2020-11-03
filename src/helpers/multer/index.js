@@ -14,7 +14,7 @@ const config = {
 
             cb(null, `${currentDate}-${fileName}${fileExtension}`)
 
-        }
+        },
 
     })
 }
